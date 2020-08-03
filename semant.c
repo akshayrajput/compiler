@@ -230,93 +230,93 @@ static void semant_(AST* node, struct symtab* M, struct symtab* V)
 {
     switch (node->kind_)
     {
-        case K_NUM:
+        case TOKEN_K_NUM:
             set_type(node, TYPE_INT);
             set_symtab(node, M, V);
             break;
                     
-        case BE_LT:
+        case TOKEN_BE_LT:
             semant_bexpr(node, "<", M, V);
             break;
                     
-        case BE_LTE:
+        case TOKEN_BE_LTE:
             semant_bexpr(node, "<=", M, V);
             break;
                     
-        case BE_GT:
+        case TOKEN_BE_GT:
             semant_bexpr(node, ">", M, V);
             break;
 
-        case BE_GTE:
+        case TOKEN_BE_GTE:
             semant_bexpr(node, ">=", M, V);
             break;
 
-        case BE_EQ:
+        case TOKEN_BE_EQ:
             semant_bexpr(node, "==", M, V);
             break;
 
-        case BE_NEQ:
+        case TOKEN_BE_NEQ:
             semant_bexpr(node, "!=", M, V);
             break;
 
-        case BE_ADD:
+        case TOKEN_BE_ADD:
             semant_bexpr(node, "+", M, V); 
             break;
 
-        case BE_SUB:
+        case TOKEN_BE_SUB:
             semant_bexpr(node, "-", M, V);
             break;
 
-        case BE_MUL:
+        case TOKEN_BE_MUL:
             semant_bexpr(node, "*", M, V);
             break;
 
-        case BE_DIV:
+        case TOKEN_BE_DIV:
             semant_bexpr(node, "/", M, V);
             break;
         
-        case K_CALL:
+        case TOKEN_K_CALL:
             set_symtab(node, M, V);
             semant(node->d.call.args_, M, V);
             break;
                     
-        case E_ASSIGN:  
+        case TOKEN_E_ASSIGN:  
             semant_assign(node, M, V);
             break;
         
-        case ARRAY_ACCESS:  
+        case TOKEN_ARRAY_ACCESS:  
             semant_array(node, M, V);
             break;
             
-        case VAR_NAME:
+        case TOKEN_VAR_NAME:
             semant_variable(node, M, V);
             break;
        
-        case RETURN:
+        case TOKEN_RETURN:
             semant_ret(node, M, V);
             break;
                     
-        case WHILE: 
+        case TOKEN_WHILE: 
             semant_while(node, M, V);
             break;
                     
-        case IF_THEN:
+        case TOKEN_IF_THEN:
             semant_if_then(node, M, V);
             break;
     
-        case COMPOUND:
+        case TOKEN_COMPOUND:
             semant_compound(node, M, V);
             break;
             
-        case PARAM:
+        case TOKEN_PARAM:
             semant_param(node, M, V);
             break;
                  
-        case FUNCTION:  
+        case TOKEN_FUNCTION:  
             semant_function(node, M, V);
             break;
               
-        case VAR_DECL:  
+        case TOKEN_VAR_DECL:  
             semant_var_decl(node, M, V);
             break;
         

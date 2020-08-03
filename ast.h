@@ -2,17 +2,28 @@
 #define AST_H
 
 enum {
-    BE_LT, BE_LTE,
-    BE_GT, BE_GTE,
-    BE_EQ, BE_NEQ,
-    BE_ADD, BE_SUB,
-    BE_MUL, BE_DIV,
-    K_NUM, K_CALL,
-    E_ASSIGN, VAR_NAME,
-    ARRAY_ACCESS, RETURN,
-    WHILE, IF_THEN,
-    COMPOUND, PARAM,
-    FUNCTION, VAR_DECL
+    TOKEN_BE_LT,
+    TOKEN_BE_LTE,
+    TOKEN_BE_GT,
+    TOKEN_BE_GTE,
+    TOKEN_BE_EQ,
+    TOKEN_BE_NEQ,
+    TOKEN_BE_ADD,
+    TOKEN_BE_SUB,
+    TOKEN_BE_MUL,
+    TOKEN_BE_DIV,
+    TOKEN_K_NUM,
+    TOKEN_K_CALL,
+    TOKEN_E_ASSIGN,
+    TOKEN_VAR_NAME,
+    TOKEN_ARRAY_ACCESS,
+    TOKEN_RETURN,
+    TOKEN_WHILE,
+    TOKEN_IF_THEN,
+    TOKEN_COMPOUND,
+    TOKEN_PARAM,
+    TOKEN_FUNCTION,
+    TOKEN_VAR_DECL
 } kind;
 
 struct list; // forward declaration

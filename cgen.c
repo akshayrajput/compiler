@@ -28,66 +28,66 @@ static void codegen_(AST* node)
 {
     switch (node->kind_)
     {
-        case K_NUM:
+        case TOKEN_K_NUM:
         {   char buf[15];
             sprintf(buf,"%d", node->d.val_);
             emit3("mov", "eax", buf);
         }   break;
         // FALL THROUGH           
-        case BE_LT:
-        case BE_LTE:
-        case BE_GT:
-        case BE_GTE:
-        case BE_EQ:
-        case BE_NEQ:
-        case BE_ADD:
-        case BE_SUB:
-        case BE_MUL:
-        case BE_DIV:
+        case TOKEN_BE_LT:
+        case TOKEN_BE_LTE:
+        case TOKEN_BE_GT:
+        case TOKEN_BE_GTE:
+        case TOKEN_BE_EQ:
+        case TOKEN_BE_NEQ:
+        case TOKEN_BE_ADD:
+        case TOKEN_BE_SUB:
+        case TOKEN_BE_MUL:
+        case TOKEN_BE_DIV:
             codegen_bexpr(node);
             break;
         
-        case K_CALL:
+        case TOKEN_K_CALL:
             codegen(node->d.call.args_);
             break;
                     
-        case E_ASSIGN:  
+        case TOKEN_E_ASSIGN:  
             codegen_assign(node);
             break;
         
-        case ARRAY_ACCESS:  
+        case TOKEN_ARRAY_ACCESS:  
             codegen_array_access(node);
             break;
             
-        case VAR_NAME:
+        case TOKEN_VAR_NAME:
             codegen_variable(node);
             break;
        
-        case RETURN:
+        case TOKEN_RETURN:
             codegen_ret(node);
             break;
                     
-        case WHILE: 
+        case TOKEN_WHILE: 
             codegen_while(node);
             break;
                     
-        case IF_THEN:
+        case TOKEN_IF_THEN:
             codegen_if_then(node);
             break;
     
-        case COMPOUND:
+        case TOKEN_COMPOUND:
             codegen_compound(node);
             break;
             
-        case PARAM:
+        case TOKEN_PARAM:
             codegen_param(node);
             break;
                  
-        case FUNCTION:  
+        case TOKEN_FUNCTION:  
             codegen_function(node);
             break;
               
-        case VAR_DECL:  
+        case TOKEN_VAR_DECL:  
             codegen_var_decl(node);
             break;
         
@@ -108,40 +108,40 @@ static void codegen_bexpr(AST* node)
     
     switch(node->kind_)
     {
-    case BE_LT:
+    case TOKEN_BE_LT:
         emit3("cmp","eax","ebx");
         emit2("setl","esi");
         break;
-    case BE_LTE:
+    case TOKEN_BE_LTE:
         emit3("cmp","eax","ebx");
         emit2("setle","esi");
         break;
-    case BE_GT:
+    case TOKEN_BE_GT:
         emit3("cmp","eax","ebx");
         emit2("setg","esi");
         break;
-    case BE_GTE:
+    case TOKEN_BE_GTE:
         emit3("cmp","eax","ebx");
         emit2("setge","esi");
         break;
-    case BE_EQ:
+    case TOKEN_BE_EQ:
         emit3("cmp","eax","ebx");
         emit2("sete","esi");
         break;
-    case BE_NEQ:
+    case TOKEN_BE_NEQ:
         emit3("cmp","eax","ebx");
         emit2("setne","esi");
         break;
-    case BE_ADD:
+    case TOKEN_BE_ADD:
         emit3("add","eax","ebx");
         break;
-    case BE_SUB:
+    case TOKEN_BE_SUB:
         emit3("sub","eax","ebx");
         break;
-    case BE_MUL:
+    case TOKEN_BE_MUL:
         emit3("imul","eax","ebx");
         break;
-    case BE_DIV:
+    case TOKEN_BE_DIV:
         emit3("idiv","eax","ebx");
         break;
     default:

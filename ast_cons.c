@@ -23,57 +23,57 @@ static AST* make_binexpr(int lineno, int type, AST* lhs, AST* rhs)
 
 AST* lt(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_LT, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_LT, lhs, rhs);
 }
 
 AST* lte(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_LTE, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_LTE, lhs, rhs);
 }
 
 AST* gt(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_GT, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_GT, lhs, rhs);
 }
 
 AST* gte(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_GTE, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_GTE, lhs, rhs);
 }
 
 AST* eq(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_EQ, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_EQ, lhs, rhs);
 }
 
 AST* neq(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_NEQ, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_NEQ, lhs, rhs);
 }
 
 AST* add(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_ADD, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_ADD, lhs, rhs);
 }
 
 AST* sub(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_SUB, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_SUB, lhs, rhs);
 }
 
 AST* mul(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_MUL, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_MUL, lhs, rhs);
 }
 
 AST* divide(AST* lhs, AST* rhs)
 {
-    return make_binexpr(yylineno, BE_DIV, lhs, rhs);
+    return make_binexpr(yylineno, TOKEN_BE_DIV, lhs, rhs);
 }
 
 AST* call(char* name, list* args)
 {
-    AST* ast = make_ast(yylineno, K_CALL);
+    AST* ast = make_ast(yylineno, TOKEN_K_CALL);
     //printf(name);
     ast->d.call.name_ = name;
     ast->d.call.args_ = args;
@@ -82,7 +82,7 @@ AST* call(char* name, list* args)
 
 AST* assign(AST* to, AST* expr)
 {
-    AST* temp = make_ast(yylineno, E_ASSIGN);
+    AST* temp = make_ast(yylineno, TOKEN_E_ASSIGN);
     temp->d.assign.to_ = to;
     temp->d.assign.expr_ = expr;
     return temp;
@@ -90,21 +90,21 @@ AST* assign(AST* to, AST* expr)
 
 AST* variable(char* name)
 {
-    AST* temp = make_ast(yylineno, VAR_NAME);
+    AST* temp = make_ast(yylineno, TOKEN_VAR_NAME);
     temp->d.variable.name_ = name;
     return temp;
 }
 
 AST* num(int val)
 {
-    AST* ast = make_ast(yylineno, K_NUM);
+    AST* ast = make_ast(yylineno, TOKEN_K_NUM);
     ast->d.val_ = val;
     return ast;
 }
 
 AST* access(char* name, AST* expr)
 {
-    AST* temp = make_ast(yylineno, ARRAY_ACCESS);
+    AST* temp = make_ast(yylineno, TOKEN_ARRAY_ACCESS);
     temp->d.access.name_ = name;
     temp->d.access.expr_ = expr;
     return temp;
@@ -112,14 +112,14 @@ AST* access(char* name, AST* expr)
 
 AST* ret(AST *expr)
 {
-    AST* temp = make_ast(yylineno, RETURN);
+    AST* temp = make_ast(yylineno, TOKEN_RETURN);
     temp->d.ret.expr_ = expr;
     return temp;
 }
 
 AST* while_loop(AST* expr, AST* stmt)
 {
-    AST* temp = make_ast(yylineno, WHILE);
+    AST* temp = make_ast(yylineno, TOKEN_WHILE);
     temp->d.while_loop.expr_ = expr;
     temp->d.while_loop.stmt_ = stmt;
     return temp;
@@ -127,7 +127,7 @@ AST* while_loop(AST* expr, AST* stmt)
 
 AST* if_then(AST* expr, AST* if_stmt, AST* else_stmt)
 {
-    AST* temp = make_ast(yylineno, IF_THEN);
+    AST* temp = make_ast(yylineno, TOKEN_IF_THEN);
     temp->d.if_then.expr_ = expr;
     temp->d.if_then.if_stmt_ = if_stmt;
     temp->d.if_then.else_stmt_ = else_stmt;
@@ -136,7 +136,7 @@ AST* if_then(AST* expr, AST* if_stmt, AST* else_stmt)
 
 AST* compound_stmt(list* decls, list* stmts)
 {
-    AST* temp = make_ast(yylineno, COMPOUND);
+    AST* temp = make_ast(yylineno, TOKEN_COMPOUND);
     temp->d.compound.decls_ = decls;
     temp->d.compound.stmts_ = stmts;
     return temp;
@@ -144,7 +144,7 @@ AST* compound_stmt(list* decls, list* stmts)
 
 AST* param(int type_spec, char* name, int ref)
 {
-    AST* temp = make_ast(yylineno, PARAM);
+    AST* temp = make_ast(yylineno, TOKEN_PARAM);
     temp->d.param.type_spec_ = type_spec;
     temp->d.param.name_ = name;
     temp->d.param.ref_ = ref;
@@ -153,7 +153,7 @@ AST* param(int type_spec, char* name, int ref)
 
 AST* function(int ret_type, char* name, list* params, AST* body)
 {
-    AST* temp = make_ast(yylineno, FUNCTION);
+    AST* temp = make_ast(yylineno, TOKEN_FUNCTION);
     temp->d.function.ret_type_ = ret_type;
     temp->d.function.name_ = name;
     temp->d.function.params_ = params;
@@ -163,7 +163,7 @@ AST* function(int ret_type, char* name, list* params, AST* body)
 
 AST* var_decl(int type_spec, char* name, int size, int ref)
 {
-    AST* temp = make_ast(yylineno, VAR_DECL);
+    AST* temp = make_ast(yylineno, TOKEN_VAR_DECL);
     temp->d.var_decl.type_spec_ = type_spec;
     temp->d.var_decl.name_ = name;
     temp->d.var_decl.size_ = size;
